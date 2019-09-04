@@ -12,10 +12,10 @@ steps:
   entrypoint: 'make'
   args: ['test']
 
-# # Deploy to App Engine
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   args: ['app', 'deploy']
-
-# Wait 15 seconds, run an integration test, and roll back changes if it's broken
+# Wait 10 seconds, run an integration test, and roll back changes if anything is broken
 - name: 'alpine'
-  args: ['sh', 'tests/cloudbuild-helpers/live-healthcheck.sh']
+  args: ['sh', 'tests/cloudbuild-helpers/live-tests.sh']
+
+# Deploy to App Engine
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy']
