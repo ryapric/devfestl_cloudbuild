@@ -81,7 +81,7 @@ uninstall: FORCE
 #################################
 # --- Google Cloud deployment ---
 #################################
-PROJECT = fredcast
+PROJECT = fredcast-248816
 IMAGE = fredcast
 TAG = latest
 REPO = gcr.io/$(PROJECT)
