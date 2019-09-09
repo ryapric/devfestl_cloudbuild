@@ -21,24 +21,24 @@ steps:
 # But first, we'll need some helpers
 ###
 
-# # Download files from GS to shared volume:
-# #   - Service Account keyfile
-# #   - Live test script
-# - name: 'gcr.io/cloud-builders/gsutil'
-#   args: ['cp', 'gs://kv-store/fredcast-248816_gcloudcli-support-user.json', '/cloudbuild-helpers/fredcast-248816_gcloudcli-support-user.json']
-#   volumes:
-#     - name: 'cloudbuild-helpers'
-#       path: '/cloudbuild-helpers'
-# - name: 'gcr.io/cloud-builders/gsutil'
-#   args: ['cp', 'gs://kv-store/live-tests.sh', '/cloudbuild-helpers/live-tests.sh']
-#   volumes:
-#     - name: 'cloudbuild-helpers'
-#       path: '/cloudbuild-helpers'
+# Download files from GS to shared volume:
+#   - Service Account keyfile
+#   - Live test script
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'gs://kv-store/fredcast-248816_gcloudcli-support-user.json', '/cloudbuild-helpers/fredcast-248816_gcloudcli-support-user.json']
+  volumes:
+    - name: 'cloudbuild-helpers'
+      path: '/cloudbuild-helpers'
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'gs://kv-store/live-tests.sh', '/cloudbuild-helpers/live-tests.sh']
+  volumes:
+    - name: 'cloudbuild-helpers'
+      path: '/cloudbuild-helpers'
 
-# # Run live tests, and roll back AppEngine version if they fail
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   entrypoint: bash
-#   args: ['/cloudbuild-helpers/live-tests.sh']
-#   volumes:
-#     - name: 'cloudbuild-helpers'
-#       path: '/cloudbuild-helpers'
+# Run live tests, and roll back AppEngine version if they fail
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: bash
+  args: ['/cloudbuild-helpers/live-tests.sh']
+  volumes:
+    - name: 'cloudbuild-helpers'
+      path: '/cloudbuild-helpers'

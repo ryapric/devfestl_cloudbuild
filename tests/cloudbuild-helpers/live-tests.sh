@@ -24,4 +24,6 @@ if grep 'ERROR' test-results; then
   APPENGINE_OLDSTABLE=$(gcloud app versions list --sort-by='~VERSION' | awk 'NR == 3 { print $2 }')
   gcloud app services set-traffic default --splits "${APPENGINE_OLDSTABLE}"=1 --quiet
   exit 1
+else
+  printf "All live tests passed!\n"
 fi
