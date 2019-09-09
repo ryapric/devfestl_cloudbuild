@@ -19,9 +19,9 @@ grep 'DATE' fredcast-call || printf "ERROR -- FREDcast call failed! \n" >> test-
 
 # If all endpoints successful, check if any errors generated, show them,
 # rollback AppEngine, and fail the build
-if grep -v 'ERROR' test-results; then
+if grep 'ERROR' test-results; then
   printf "ERROR: Live test(s) failed; rolling back to previous AppEngine version...\n"
   APPENGINE_OLDSTABLE=$(gcloud app versions list --sort-by='~VERSION' | awk 'NR == 3 { print $2 }')
-  gcloud app versions migrate "${APPENGINE_OLDSTABLE}" --quiet
+  gcloud app services set-traffic default --splits "${APPENGINE_OLDSTABLE}"=1 --quiet
   exit 1
 fi
