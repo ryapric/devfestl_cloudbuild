@@ -37,15 +37,6 @@ steps:
     - name: 'cloudbuild-helpers'
       path: '/cloudbuild-helpers'
 
-<<<<<<< HEAD
-# Run live tests, and roll back AppEngine version if they fail
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: bash
-  args: ['/cloudbuild-helpers/live-tests.sh']
-  volumes:
-    - name: 'cloudbuild-helpers'
-      path: '/cloudbuild-helpers'
-=======
 # # Run live tests, and roll back AppEngine version if they fail
 # - name: 'gcr.io/cloud-builders/gcloud'
 #   entrypoint: bash
@@ -65,4 +56,3 @@ steps:
 # - volumes:
 #     - name: 'cloudbuild-helpers'
 #       path: '/cloudbuild-helpers'
->>>>>>> 58b2c6b... Initial commit for asking for DRANK
