@@ -1,4 +1,5 @@
-# Config file for Google Cloud Build, with App Engine deployment
+# Config file for Google Cloud Build, with App Engine deployment, live
+# integration tests, rollback on failure, and custom notification logic.
 
 # Visit Cloud Build's docs page for more details and extensibility:
 # https://cloud.google.com/cloud-build/docs/<language>
@@ -7,7 +8,7 @@
 # in the overall build, and therefore no deployment (which is good)
 steps:
 
-# Run tests
+# Run unit & functional tests, as per usual
 - name: 'python:3.7-buster'
   entrypoint: 'make'
   args: ['test']
@@ -17,7 +18,8 @@ steps:
   args: ['app', 'deploy']
 
 ###
-# Run functional tests, and roll back changes if anything is broken in prod
+# Run live integration tests, and roll back changes if anything is broken in
+# deployment.
 # But first, we'll need some helpers
 ###
 
@@ -35,6 +37,7 @@ steps:
     - name: 'cloudbuild-helpers'
       path: '/cloudbuild-helpers'
 
+<<<<<<< HEAD
 # Run live tests, and roll back AppEngine version if they fail
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: bash
@@ -42,3 +45,24 @@ steps:
   volumes:
     - name: 'cloudbuild-helpers'
       path: '/cloudbuild-helpers'
+=======
+# # Run live tests, and roll back AppEngine version if they fail
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   entrypoint: bash
+#   args: ['/cloudbuild-helpers/live-tests.sh']
+#   volumes:
+#     - name: 'cloudbuild-helpers'
+#       path: '/cloudbuild-helpers'
+
+# # Check for how many builds have failed within a time window, and ask Angela to
+# # buy tequila for the devs if it's a lot
+# - name: 'gcr.io/cloud-builders/gsutil'
+#   args: ['cp', 'gs://kv-store/slack-token', '/cloudbuild-helpers/slack-token']
+#   volumes:
+#     - name: 'cloudbuild-helpers'
+#       path: '/cloudbuild-helpers'
+# - name: gcr.io/fredcast-248816/ask-angela:latest
+# - volumes:
+#     - name: 'cloudbuild-helpers'
+#       path: '/cloudbuild-helpers'
+>>>>>>> 58b2c6b... Initial commit for asking for DRANK
