@@ -60,8 +60,7 @@ gcloud-build-local:
 # Push up live-tests.sh to GS
 gcloud-push-cloudbuild-helpers:
 	@gsutil cp tests/cloudbuild-helpers/live-tests.sh gs://kv-store/live-tests.sh
-	@gsutil cp tests/cloudbuild-helpers/ask-angela/ask-angela.sh gs://kv-store/ask-angela.sh
-	@gsutil cp tests/cloudbuild-helpers/ask-angela/ask-angela.py gs://kv-store/ask-angela.py
+	@gsutil cp tests/cloudbuild-helpers/ask-angela.sh gs://kv-store/ask-angela.sh
 
 # Add githooks to local config
 add-git-hooks:
