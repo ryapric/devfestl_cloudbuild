@@ -51,7 +51,7 @@ steps:
 
 # Run live tests, and roll back AppEngine version if they fail
 - name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: bash
+  entrypoint: 'bash'
   args: ['/cloudbuild-helpers/live-tests.sh']
   volumes:
     - name: 'cloudbuild-helpers'
@@ -61,7 +61,7 @@ steps:
 # Check for how many builds have failed within a time window, and ask Angela to
 # buy tequila for the devs if it's a lot
 - name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: ['bash']
+  entrypoint: 'bash'
   args: ['/cloudbuild-helpers/ask-angela.sh', 'test']
   volumes:
     - name: 'cloudbuild-helpers'
