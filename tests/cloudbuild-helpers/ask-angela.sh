@@ -40,3 +40,6 @@ if grep 'FAILURE' <(head -n1 build_status) && [[ $(wc -l <(uniq build_status) | 
   exit 1
 
 fi
+
+printf "Build logs look pretty good! No need to bother Angela with anything... yet.\n"
+exit 0
