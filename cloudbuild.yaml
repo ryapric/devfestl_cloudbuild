@@ -24,14 +24,8 @@ steps:
 ###
 
 # Download files from GS to shared volume:
-#   - Service Account keyfile
-#   - Live test script
-#   - Script to 
-# - name: 'gcr.io/cloud-builders/gsutil'
-#   args: ['cp', 'gs://kv-store/fredcast-248816_gcloudcli-support-user.json', '/cloudbuild-helpers/fredcast-248816_gcloudcli-support-user.json']
-#   volumes:
-#     - name: 'cloudbuild-helpers'
-#       path: '/cloudbuild-helpers'
+#   - Live-test script
+#   - Script to post to Slack to beg Angela for an expense
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'gs://kv-store/live-tests.sh', '/cloudbuild-helpers/live-tests.sh']
   volumes:
@@ -39,11 +33,6 @@ steps:
       path: '/cloudbuild-helpers'
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'gs://kv-store/ask-angela.sh', '/cloudbuild-helpers/ask-angela.sh']
-  volumes:
-    - name: 'cloudbuild-helpers'
-      path: '/cloudbuild-helpers'
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'gs://kv-store/ask-angela.py', '/cloudbuild-helpers/ask-angela.py']
   volumes:
     - name: 'cloudbuild-helpers'
       path: '/cloudbuild-helpers'
@@ -62,6 +51,7 @@ steps:
 # buy tequila for the devs if it's a lot
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
+  # === Remove or change the 'test' arg to have it post to the accounting channel
   args: ['/cloudbuild-helpers/ask-angela.sh', 'test']
   volumes:
     - name: 'cloudbuild-helpers'

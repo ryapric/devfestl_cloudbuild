@@ -55,6 +55,7 @@ clean: FORCE
 
 # Using local build tool, see how a Cloud Build would run
 gcloud-build-local:
+	@make -s gcloud-push-cloudbuild-helpers
 	@cloud-build-local --dryrun=false .
 
 # Push up live-tests.sh to GS
