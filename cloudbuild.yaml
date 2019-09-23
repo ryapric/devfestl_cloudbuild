@@ -13,46 +13,46 @@ steps:
   entrypoint: 'make'
   args: ['test']
 
-# Deploy to App Engine
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy']
+# # Deploy to App Engine
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   args: ['app', 'deploy']
 
-###
-# Run live integration tests, and roll back changes if anything is broken in
-# deployment.
-# But first, we'll need some helpers
-###
+# ###
+# # Run live integration tests, and roll back changes if anything is broken in
+# # deployment.
+# # But first, we'll need some helpers
+# ###
 
-# Download files from GS to shared volume:
-#   - Live-test script
-#   - Script to post to Slack to beg Angela for an expense
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'gs://kv-store/live-tests.sh', '/cloudbuild-helpers/live-tests.sh']
-  volumes:
-    - name: 'cloudbuild-helpers'
-      path: '/cloudbuild-helpers'
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'gs://kv-store/ask-angela.sh', '/cloudbuild-helpers/ask-angela.sh']
-  volumes:
-    - name: 'cloudbuild-helpers'
-      path: '/cloudbuild-helpers'
-
-
-# Run live tests, and roll back AppEngine version if they fail
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
-  args: ['/cloudbuild-helpers/live-tests.sh']
-  volumes:
-    - name: 'cloudbuild-helpers'
-      path: '/cloudbuild-helpers'
+# # Download files from GS to shared volume:
+# #   - Live-test script
+# #   - Script to post to Slack to beg Angela for an expense
+# - name: 'gcr.io/cloud-builders/gsutil'
+#   args: ['cp', 'gs://kv-store/live-tests.sh', '/cloudbuild-helpers/live-tests.sh']
+#   volumes:
+#     - name: 'cloudbuild-helpers'
+#       path: '/cloudbuild-helpers'
+# - name: 'gcr.io/cloud-builders/gsutil'
+#   args: ['cp', 'gs://kv-store/ask-angela.sh', '/cloudbuild-helpers/ask-angela.sh']
+#   volumes:
+#     - name: 'cloudbuild-helpers'
+#       path: '/cloudbuild-helpers'
 
 
-# Check for how many builds have failed within a time window, and ask Angela to
-# buy tequila for the devs if it's a lot
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
-  # === Remove or change the 'test' arg to have it post to the accounting channel
-  args: ['/cloudbuild-helpers/ask-angela.sh', 'test']
-  volumes:
-    - name: 'cloudbuild-helpers'
-      path: '/cloudbuild-helpers'
+# # Run live tests, and roll back AppEngine version if they fail
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   entrypoint: 'bash'
+#   args: ['/cloudbuild-helpers/live-tests.sh']
+#   volumes:
+#     - name: 'cloudbuild-helpers'
+#       path: '/cloudbuild-helpers'
+
+
+# # Check for how many builds have failed within a time window, and ask Angela to
+# # buy tequila for the devs if it's a lot
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   entrypoint: 'bash'
+#   # === Remove or change the 'test' arg to have it post to the accounting channel
+#   args: ['/cloudbuild-helpers/ask-angela.sh', 'test']
+#   volumes:
+#     - name: 'cloudbuild-helpers'
+#       path: '/cloudbuild-helpers'

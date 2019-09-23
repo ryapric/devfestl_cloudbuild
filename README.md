@@ -24,8 +24,9 @@ Engine](https://cloud.google.com/appengine), and its deployment config file
 API Documentation
 -----------------
 
-This Flask application is sometimes hosted [here](https://fredcast.appspot.com),
-and exposes several endpoints from which you may request data via query strings:
+This Flask application is sometimes hosted
+[here](https://fredcast-248816.appspot.com), and exposes several endpoints from
+which you may request data via query strings:
 
 | Endpoint | Query String Parameter | Parameter Format | Default |
 | --- | --- | --- | --- |
