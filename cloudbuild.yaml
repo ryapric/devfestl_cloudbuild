@@ -41,17 +41,17 @@ steps:
       path: '/cloudbuild-helpers'
 
 
-# # Check for how many builds have failed within a time window, and ask Angela to
-# # buy tequila for the devs if it's a lot
-# - name: 'gcr.io/cloud-builders/gsutil'
-#   args: ['cp', 'gs://kv-store/ask-angela.sh', '/cloudbuild-helpers/ask-angela.sh']
-#   volumes:
-#     - name: 'cloudbuild-helpers'
-#       path: '/cloudbuild-helpers'
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   entrypoint: 'bash'
-#   # === Remove or change the 'test' arg to have it post to the accounting channel
-#   args: ['/cloudbuild-helpers/ask-angela.sh', 'test']
-#   volumes:
-#     - name: 'cloudbuild-helpers'
-#       path: '/cloudbuild-helpers'
+# Check for how many builds have failed within a time window, and ask Angela to
+# buy tequila for the devs if it's a lot
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'gs://kv-store/ask-angela.sh', '/cloudbuild-helpers/ask-angela.sh']
+  volumes:
+    - name: 'cloudbuild-helpers'
+      path: '/cloudbuild-helpers'
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  # === Remove or change the 'test' arg to have it post to the accounting channel
+  args: ['/cloudbuild-helpers/ask-angela.sh', 'test']
+  volumes:
+    - name: 'cloudbuild-helpers'
+      path: '/cloudbuild-helpers'
