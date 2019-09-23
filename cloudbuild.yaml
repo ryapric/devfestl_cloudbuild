@@ -32,13 +32,13 @@ steps:
       path: '/cloudbuild-helpers'
 
 
-# # Run live tests, and roll back AppEngine version if they fail
-# - name: 'gcr.io/cloud-builders/gcloud'
-#   entrypoint: 'bash'
-#   args: ['/cloudbuild-helpers/live-tests.sh']
-#   volumes:
-#     - name: 'cloudbuild-helpers'
-#       path: '/cloudbuild-helpers'
+# Run live tests, and roll back AppEngine version if they fail
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['/cloudbuild-helpers/live-tests.sh']
+  volumes:
+    - name: 'cloudbuild-helpers'
+      path: '/cloudbuild-helpers'
 
 
 # # Check for how many builds have failed within a time window, and ask Angela to
