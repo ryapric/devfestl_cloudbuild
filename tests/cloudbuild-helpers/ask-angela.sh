@@ -20,7 +20,7 @@ fi
 gcloud builds list --sort-by='~CREATE_TIME' | awk 'NR>1 && NR<=(5+1) && $6 != "" { print $6 }' > build_status
 
 # === Uncomment to force-trigger Slack post ===
-printf "FAILURE\nFAILURE\nFAILURE\nFAILURE\nFAILURE\n" > build_status
+# printf "FAILURE\nFAILURE\nFAILURE\nFAILURE\nFAILURE\n" > build_status
 
 # If latest run was a failure, AND all past 5 runs were failures, then post to
 # Slack
