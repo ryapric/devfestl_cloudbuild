@@ -3,7 +3,7 @@
 
 # Visit Cloud Build's docs page for more details and extensibility:
 # https://cloud.google.com/cloud-build/docs/<language>
-
+ 
 # Since these steps are run in sequence, a failed test results in a fail
 # in the overall build, and therefore no deployment (which is good)
 steps:
